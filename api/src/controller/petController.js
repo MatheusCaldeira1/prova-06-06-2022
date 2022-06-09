@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { consultarTodos } from "../repository/petRepository.js";
+import { consultarTodos, inserirNome } from "../repository/petRepository.js";
 const server = Router();
 
 server.get('/pets' , async (req,resp) => {
     try{ 
-    const consolutar = req.body;
-    const petconsulta = consultarTodos(consolutar);
+    const petconsulta = await consultarTodos();
     resp.send(petconsulta)
     }catch(err){
     resp.status(400).send({
@@ -18,9 +17,9 @@ server.get('/pets' , async (req,resp) => {
 
 server.post('/pet/nome', async (req, resp) => {
     try{    
-        const petParaInserir = req.body;
-const petInserido = await adicionarPaciente(petParaInserir)
-resp.send(petInserido)
+const petParaInserir = req.body;
+const petInserido = await inserirNome(petParaInserir)
+resp.send(petParaInserir)
     }catch(err){
         resp.status(400).send({
             erro: err.message
