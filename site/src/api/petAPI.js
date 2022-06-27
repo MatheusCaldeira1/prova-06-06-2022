@@ -11,10 +11,7 @@ export async function cadastrarPet(nome){
     return r.data
 }
 
-export async function listarTodos(nome, id){
-    const resp = await api.post('/pets',{
-        nome:nome,
-        id:id
-    })
+export async function listarTodos(){
+    const resp = await api.get('/pets')
     return resp.data
 }
